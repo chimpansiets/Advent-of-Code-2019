@@ -13,7 +13,7 @@ def meets_requirements(combination):
         i += 1
     return (double)
 
-def get_passwords(input):
+def get_passwords():
     passwords = []
 
     for nb in range(125730, 579381):
@@ -22,9 +22,5 @@ def get_passwords(input):
     return (passwords)
 
 if __name__ == '__main__':
-    st = list(input())
-    st.remove('-')
-    input = arr.array('B', map(int, st))
-
-    passwords = get_passwords(input)
+    passwords = get_passwords()
     print(len(passwords))
