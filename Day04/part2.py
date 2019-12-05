@@ -29,13 +29,6 @@ def meets_requirements(combination):
             double = 1
     return (double)
 
-print(meets_requirements(str(112233)))
-print(meets_requirements(str(123444)))
-print(meets_requirements(str(111122)))
-print(meets_requirements(str(112223)))
-print(meets_requirements(str(133322)))
-
-
 def get_passwords():
     passwords = []
 
