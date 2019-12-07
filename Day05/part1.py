@@ -72,6 +72,83 @@ def store_operation(output, i):
     output[pos] = value
     return (output)
 
+def print_operation(output, i):
+    mode1 = get_mode1(output, i)
+    if (mode1) == 0:
+        print(output[output[i + 1]])
+    else:
+        print(output[i + 1])
+
+def jump_if_true_operation(output, i):
+    mode1 = get_mode1(output, i)
+    mode2 = get_mode2(output, i)
+    if (mode1 == 0):
+        arg1 = output[output[i + 1]]
+    else:
+        arg1 = output[i + 1]
+    if (mode2 == 0):
+        arg2 = output[output[i + 2]]
+    else:
+        arg2 = output[i + 2]
+
+    if (arg1 != 0):
+        return (arg2)
+    else:
+        return (i + 3)
+
+def jump_if_false_operation(output, i):
+    mode1 = get_mode1(output, i)
+    mode2 = get_mode2(output, i)
+    if (mode1 == 0):
+        arg1 = output[output[i + 1]]
+    else:
+        arg1 = output[i + 1]
+    if (mode2 == 0):
+        arg2 = output[output[i + 2]]
+    else:
+        arg2 = output[i + 2]
+
+    if (arg1 == 0):
+        return (arg2)
+    else:
+        return (i + 3)
+
+def if_less_than_operation(output, i):
+    mode1 = get_mode1(output, i)
+    mode2 = get_mode2(output, i)
+    if (mode1 == 0):
+        arg1 = output[output[i + 1]]
+    else:
+        arg1 = output[i + 1]
+    if (mode2 == 0):
+        arg2 = output[output[i + 2]]
+    else:
+        arg2 = output[i + 2]
+    pos_to_store = output[i + 3]
+
+    if (arg1 < arg2):
+        output[pos_to_store] = 1
+    else:
+        output[pos_to_store] = 0
+
+def if_equal_operation(output, i):
+    mode1 = get_mode1(output, i)
+    mode2 = get_mode2(output, i)
+    if (mode1 == 0):
+        arg1 = output[output[i + 1]]
+    else:
+        arg1 = output[i + 1]
+    if (mode2 == 0):
+        arg2 = output[output[i + 2]]
+    else:
+        arg2 = output[i + 2]
+    pos_to_store = output[i + 3]
+
+    if (arg1 == arg2):
+        output[pos_to_store] = 1
+    else:
+        output[pos_to_store] = 0
+
 def run_program_alarm(intcode):
     output = list(intcode)
     i = 0
@@ -88,16 +165,20 @@ def run_program_alarm(intcode):
             output = store_operation(output, i)
             i += 2
         elif (int(str(opcode)[len(str(opcode)) - 2:]) == 4):
-            mode1 = get_mode1(output, i)
-            if (mode1) == 0:
-                print(output[output[i + 1]])
-            else:
-                print(output[i + 1])
+            print_operation(output, i)
             i += 2
+        elif (int(str(opcode)[len(str(opcode)) - 2:]) == 5):
+            i = jump_if_true_operation(output, i)
+        elif (int(str(opcode)[len(str(opcode)) - 2:]) == 6):
+            i = jump_if_false_operation(output, i)
+        elif (int(str(opcode)[len(str(opcode)) - 2:]) == 7):
+            if_less_than_operation(output, i)
+            i += 4
+        elif (int(str(opcode)[len(str(opcode)) - 2:]) == 8):
+            if_equal_operation(output, i)
+            i += 4
         elif (opcode == 99):
             break
-        # else:
-        #     i += 1
     return (output)
 
 if __name__ == "__main__":

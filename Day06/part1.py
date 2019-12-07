@@ -19,7 +19,6 @@ def get_indirect_orbits(graph, node, ctr):
             ctr += get_indirect_orbits(graph, elem, 0)
         return (ctr)
 
-
 if __name__ == "__main__":
     G = nx.DiGraph()
 
@@ -29,6 +28,7 @@ if __name__ == "__main__":
     nodes = G.nodes()
     edges = G.edges()
     indirect_orbits = 0
+    G = G.to_directed()
     for node in nodes:
         indirect_orbits += get_indirect_orbits(G, node, 0)
     print(indirect_orbits)
