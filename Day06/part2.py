@@ -32,8 +32,6 @@ if __name__ == "__main__":
         indirect_orbits += get_indirect_orbits(G, node, 0)
     planet_you = list(G.predecessors('YOU'))
     planet_san = list(G.predecessors('SAN'))
-    print(planet_you)
-    print(planet_san)
     print(indirect_orbits)
     G = G.to_undirected()
     print(len(nx.bidirectional_shortest_path(G, planet_you[0], planet_san[0])) - 1)
