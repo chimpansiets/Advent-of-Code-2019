@@ -1,3 +1,4 @@
+
 class Layer:
     def __init__(self, layer_id):
         self.values = []
@@ -28,6 +29,27 @@ def part1(layers):
 
     print("Part1: " + str(amount_ones * amount_twos))
 
+def check_colour(layers, x, y):
+    for layer in layers:
+        if (layer.values[y][x] == '0'):
+            return ('0')
+        elif (layer.values[y][x] == '1'):
+            return ('1')
+    return ('2')
+
+def part2(layers, width, length):
+    message = []
+
+    for y in range(length):
+        row = []
+        for x in range(width):
+            row.append(check_colour(layers, x, y))
+        message.append(row)
+
+    print("Part2: ")
+    for row in message:
+        print(' '.join(row))
+
 if __name__ == "__main__":
     image_data = input()
     layers = []
@@ -53,3 +75,4 @@ if __name__ == "__main__":
     layers.append(curr_layer)
 
     part1(layers)
+    part2(layers, width, length)
