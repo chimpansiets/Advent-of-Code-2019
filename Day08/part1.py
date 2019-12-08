@@ -7,7 +7,31 @@ class Layer:
     def add_row(self, row):
         self.values.append(row)
 
+def part1(layers):
+    least_zeroes = 9999999999
+    layer_id = 0
+    for layer in layers:
+        amount_zeroes = 0
+        for row in layer.values:
+            amount_zeroes += row.count('0')
+        if (amount_zeroes < least_zeroes):
+            least_zeroes = amount_zeroes
+            layer_id = layer.layer_id
 
+    print(least_zeroes)
+    print(layers[layer_id].values)
+    img_values = layers[layer_id].values
+
+    amount_ones = 0
+    amount_twos = 0
+
+    for row in img_values:
+        amount_ones += row.count('1')
+        amount_twos += row.count('2')
+
+    print(amount_ones)
+    print(amount_twos)
+    print(amount_ones * amount_twos)
 
 if __name__ == "__main__":
     image_data = input()
@@ -33,27 +57,4 @@ if __name__ == "__main__":
     curr_layer.values.append(row)
     layers.append(curr_layer)
 
-    least_zeroes = 9999999999
-    layer_id = 0
-    for layer in layers:
-        amount_zeroes = 0
-        for row in layer.values:
-            amount_zeroes += row.count('0')
-        if (amount_zeroes < least_zeroes):
-            least_zeroes = amount_zeroes
-            layer_id = layer.layer_id
-
-    print(least_zeroes)
-    print(layers[layer_id].values)
-    img_values = layers[layer_id].values
-
-    amount_ones = 0
-    amount_twos = 0
-
-    for row in img_values:
-        amount_ones += row.count('1')
-        amount_twos += row.count('2')
-
-    print(amount_ones)
-    print(amount_twos)
-    print(amount_ones * amount_twos)
+    part1(layers)
