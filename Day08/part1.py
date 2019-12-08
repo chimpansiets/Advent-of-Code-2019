@@ -18,8 +18,6 @@ def part1(layers):
             least_zeroes = amount_zeroes
             layer_id = layer.layer_id
 
-    print(least_zeroes)
-    print(layers[layer_id].values)
     img_values = layers[layer_id].values
 
     amount_ones = 0
@@ -29,9 +27,7 @@ def part1(layers):
         amount_ones += row.count('1')
         amount_twos += row.count('2')
 
-    print(amount_ones)
-    print(amount_twos)
-    print(amount_ones * amount_twos)
+    print("Part1: " + str(amount_ones * amount_twos))
 
 if __name__ == "__main__":
     image_data = input()
