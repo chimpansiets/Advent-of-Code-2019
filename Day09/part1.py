@@ -29,6 +29,7 @@ def add_operation(output, i, relative_base):
     mode3 = get_mode3(output, i)
     pos1 = output[i + 1]
     pos2 = output[i + 2]
+
     if (mode3 == 0):
         pos_to_store = output[i + 3]
     elif (mode3 == 2):
@@ -59,11 +60,11 @@ def multiply_operation(output, i, relative_base):
 
     pos1 = output[i + 1]
     pos2 = output[i + 2]
+
     if (mode3 == 0):
         pos_to_store = output[i + 3]
     elif (mode3 == 2):
         pos_to_store = relative_base + output[i + 3]
-
 
     if (mode1 == 0):
         mult_value1 = output[pos1]
@@ -124,8 +125,6 @@ def jump_if_true_operation(output, i, relative_base):
     if (arg1 != 0):
         if (mode3 == 0):
             return (arg2)
-        elif (mode3 == 2):
-            return (relative_base + arg2)
     else:
         return (i + 3)
 
@@ -150,8 +149,6 @@ def jump_if_false_operation(output, i, relative_base):
     if (arg1 == 0):
         if (mode3 == 0):
             return (arg2)
-        elif (mode3 == 2):
-            return (relative_base + arg2)
     else:
         return (i + 3)
 
@@ -230,7 +227,7 @@ def run_program_alarm(intcode):
 
     while (i < len(output)):
         opcode = output[i]
-        print("opcode: " + str(opcode))
+        # print("opcode: " + str(opcode))
         if (int(str(opcode)[len(str(opcode)) - 2:]) == 1):
             output = add_operation(output, i, relative_base)
             i += 4
